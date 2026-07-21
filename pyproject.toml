@@ -1,0 +1,78 @@
+[project]
+name = "qolsys-controller"
+version = "1.6.0"
+authors = [
+  { name="Eric Hylands", email="" },
+]
+description = "A Python module that emulates a virtual IQ Remote device, enabling full local control of a Qolsys IQ Panel"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Home Automation",
+    "License :: OSI Approved :: MIT License",
+]
+license = "MIT"
+dependencies = [
+    "aiofiles>=25.1.0",
+    "aiomqtt>=2.5.1",
+    "cryptography>=44.0.1,<=49.0.0",
+    "passlib>=1.7.4",
+    "zeroconf>=0.148.0",
+]
+
+[project.optional-dependencies]
+bridge = [
+    "amqtt>=0.10.0",
+]
+dev = [
+    "pytest>=9.0",
+    "pytest-asyncio>=1.0",
+    "ruff",
+    "types-aiofiles",
+]
+
+[project.urls]
+Homepage = "https://github.com/EHylands/QolsysController"
+Issues = "https://github.com/EHylands/QolsysController/issues"
+Repository = "https://github.com/EHylands/QolsysController.git"
+
+[build-system]
+requires = ["hatchling >= 1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["qolsys_controller/"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 127
+target-version = "py312"
+
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 25
+
+[project.scripts]
+qolsys-controller = "qolsys_controller.cli:main"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+tag_format = "v{version}"
+branch = "main"
+commit_parser = "conventional"
+
+
+[tool.semantic_release.changelog]
+file = "CHANGELOG.md"
+
+[tool.semantic_release.remote]
+name = "origin"
+type = "github"
+upload_to_release = true

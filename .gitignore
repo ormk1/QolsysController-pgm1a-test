@@ -1,0 +1,20 @@
+/.DS_Store
+/.venv
+/__pycache__
+.pyc
+build
+dist
+config
+__pycache__
+*.key
+*.secure
+*.cer
+*.csr
+*.qolsys
+.DS_Store
+
+
+# Local Phase 1A artefacts
+PHASE_1A_PGM_CONTROLLER_HANDOFF.md
+.pytest_cache/
+.ruff_cache/
